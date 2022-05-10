@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "node index.js"
   },
   "author": "neeraj00x",
   "license": "MIT",
@@ -14,8 +14,5 @@
     "express": "^4.17.3",
     "mongoose": "^6.2.9",
     "nanoid": "^3.3.4"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.16"
   }
 }
