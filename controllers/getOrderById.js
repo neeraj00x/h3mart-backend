@@ -1,11 +1,13 @@
+const Orders = require('../models/orders.js');
+
 function getBooks(req, res) {
     try {
         {
-            var query = req.query.task;
+            var query = req.query.orderId;
 
-            Tasks.find({
-                'task': query
-            }, function (err, result) {
+            Orders.findOne({
+                'orderId': query,
+            },{ _id: 0 }, function (err, result) {
                 if (err) throw err;
                 if (result) {
                     res.json(result)
@@ -14,11 +16,11 @@ function getBooks(req, res) {
                         error: 'Error'
                     }))
                 }
-            })
+            });
         }
     }
     catch (t) {
-        response.status(500).send(t, 'Some error happened in GET Request');
+        res.status(500).send(t, 'Some error happened in GET Request');
     }
 }
 

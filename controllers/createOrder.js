@@ -4,6 +4,7 @@ const Orders = require("../models/orders")
 function createOrder(request, response) {
     try{
         request.body.orderId = nanoid(7);
+        console.log(request.body);
         const newOrder = new Orders(request.body);
         newOrder.save().then(function() {
             console.log('Saved!');
