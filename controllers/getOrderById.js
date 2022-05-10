@@ -7,7 +7,7 @@ function getBooks(req, res) {
 
             Orders.findOne({
                 'orderId': query,
-            },{ _id: 0 }, function (err, result) {
+            },{ _id: 0, __v:0 }, function (err, result) {
                 if (err) throw err;
                 if (result) {
                     res.json(result)
