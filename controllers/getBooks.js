@@ -4,15 +4,16 @@ const Books = require('../models/books.js');
 function getBooks(request, response) {
     try {
         let page = +request.query.page;
-        let skip = Math.max(5*(page-1),0)
-        let size = Math.min((+request.query.size)?request.query.size:5, 5);
+        let skip = Math.max(5*(page-1),0);
+        let size = +request.query.size;
+        let limit = Math.min((!size&&page)?5:size, 5);
 
-        Books.find({},{ _id: 0, __v:0 },{ skip: skip, limit: size }, function (err, result) {
+        Books.find({},{ _id: 0, __v:0 },{ skip: skip, limit: limit }, function (err, result) {
             if (err) throw err;
             if (result) {
                 let res= {
-                    page: (page)?page:1,
-                    items: (page && size)?size:5,
+                    page: (page)?page:0,
+                    items: result.length,
                     books: result
                 }
                 response.json(res)
