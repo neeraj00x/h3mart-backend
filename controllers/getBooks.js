@@ -3,13 +3,15 @@ const Books = require('../models/books.js');
 
 function getBooks(request, response) {
     try {
-        let page = request.query.page;
+        let page = +request.query.page;
+        let size = Math.min(request.query.size, 5);
 
-        Books.find({},{ _id: 0, __v:0 },{ skip: 5*(page-1), limit: 5 }, function (err, result) {
+        Books.find({},{ _id: 0, __v:0 },{ skip: 5*(page-1), limit: size }, function (err, result) {
             if (err) throw err;
             if (result) {
                 let res= {
                     page: page,
+                    items: size,
                     books: result
                 }
                 response.json(res)
